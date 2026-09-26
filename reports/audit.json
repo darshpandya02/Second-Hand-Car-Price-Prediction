@@ -1,0 +1,92 @@
+{
+  "notebook": {
+    "csv_loaded": "car data.csv",
+    "rows": 301,
+    "columns_after_dropping_name": 8,
+    "printed_mae": 0.887967032967033,
+    "printed_mse": 3.9845219010087907,
+    "printed_rmse": 1.9961267246867846,
+    "mentions_r2": false,
+    "mentions_accuracy": false,
+    "mentions_tableau": false,
+    "mentions_carwale": false,
+    "execution_counts": [
+      null
+    ]
+  },
+  "implied_test_r2_from_printed_mse": 0.8667653866941947,
+  "rerun_with_fixes": {
+    "test_rows": 91,
+    "test_variance": 29.90605670812704,
+    "runs": [
+      {
+        "r2": 0.8638416857650129,
+        "mae": 0.9029803296703272,
+        "mape": 0.21268896810800136,
+        "rmse": 2.017909380223628,
+        "best_params": {
+          "n_estimators": 1000,
+          "min_samples_split": 2,
+          "min_samples_leaf": 1,
+          "max_features": "sqrt",
+          "max_depth": 25
+        }
+      },
+      {
+        "r2": 0.8691779491294194,
+        "mae": 0.8852735714285719,
+        "mape": 0.2178899174133126,
+        "rmse": 1.977971605460772,
+        "best_params": {
+          "n_estimators": 1000,
+          "min_samples_split": 2,
+          "min_samples_leaf": 1,
+          "max_features": "sqrt",
+          "max_depth": 25
+        }
+      },
+      {
+        "r2": 0.8676027271417197,
+        "mae": 0.8823567032967038,
+        "mape": 0.20899430612336065,
+        "rmse": 1.9898443029797834,
+        "best_params": {
+          "n_estimators": 1000,
+          "min_samples_split": 2,
+          "min_samples_leaf": 1,
+          "max_features": "sqrt",
+          "max_depth": 25
+        }
+      },
+      {
+        "r2": 0.8659546539478667,
+        "mae": 0.8869218681318701,
+        "mape": 0.21071858588552259,
+        "rmse": 2.0021907302990916,
+        "best_params": {
+          "n_estimators": 1000,
+          "min_samples_split": 2,
+          "min_samples_leaf": 1,
+          "max_features": "sqrt",
+          "max_depth": 25
+        }
+      },
+      {
+        "r2": 0.8663648290267096,
+        "mae": 0.8985720879120869,
+        "mape": 0.20903263231913577,
+        "rmse": 1.9991250589514085,
+        "best_params": {
+          "n_estimators": 1000,
+          "min_samples_split": 2,
+          "min_samples_leaf": 1,
+          "max_features": "sqrt",
+          "max_depth": 25
+        }
+      }
+    ],
+    "r2_mean": 0.8665883690021456,
+    "r2_min": 0.8638416857650129,
+    "r2_max": 0.8691779491294194
+  }
+}

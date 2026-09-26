@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Used Car Price Estimator (India) | CarDekho data</title>
+  <meta name="description" content="Estimate the resale price of a used car in India with a gradient-boosting model trained on 6,926 CarDekho listings. Runs entirely in your browser.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1>Used Car Price Estimator</h1>
+      <p class="lede">Estimate the resale price of a used car in India. The model is a gradient-boosted tree ensemble trained on
+        <span id="n-rows">6,926</span> de-duplicated CarDekho listings (model years 1983 to 2020) and runs entirely in your browser.</p>
+      <nav><a href="#estimate">Estimate</a><a href="#trends">Market trends</a><a href="#model">Model and limits</a>
+        <a href="https://github.com/darshpandya02/Second-Hand-Car-Price-Prediction">Source on GitHub</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="estimate" class="card">
+      <h2>Estimate a price</h2>
+      <form id="car-form" autocomplete="off">
+        <div class="grid">
+          <label>Brand<select id="brand" name="brand" required></select></label>
+          <label>Model<select id="model" name="model" required></select></label>
+          <label>Model year<input id="year" name="year" type="number" min="1983" max="2020" step="1" required></label>
+          <label>Kilometres driven<input id="km_driven" name="km_driven" type="number" min="0" max="1000000" step="any" value="50000" required></label>
+          <label>Fuel<select id="fuel" name="fuel"></select></label>
+          <label>Transmission<select id="transmission" name="transmission"></select></label>
+          <label>Owners so far<select id="owner" name="owner"></select></label>
+          <label>Seller type<select id="seller_type" name="seller_type"></select></label>
+        </div>
+        <details id="specs">
+          <summary>Specifications (pre-filled with the median for this model and fuel)</summary>
+          <div class="grid">
+            <label>Engine (cc)<input id="engine" name="engine" type="number" min="600" max="7000" step="any"></label>
+            <label>Max power (bhp)<input id="max_power" name="max_power" type="number" min="20" max="700" step="any"></label>
+            <label>Mileage (kmpl or km/kg)<input id="mileage" name="mileage" type="number" min="1" max="50" step="any"></label>
+            <label>Seats<input id="seats" name="seats" type="number" min="2" max="14" step="1"></label>
+          </div>
+        </details>
+        <button id="predict-btn" type="submit" disabled>Loading model...</button>
+      </form>
+      <div id="result" class="result" aria-live="polite" hidden>
+        <div class="price-label">Estimated price</div>
+        <div id="price" class="price"></div>
+        <div id="interval" class="interval"></div>
+        <div id="bar" class="bar"><span id="bar-fill"></span><i id="bar-point"></i></div>
+        <ul id="notes" class="notes"></ul>
+      </div>
+    </section>
+
+    <section id="trends" class="card">
+      <h2>Market trends in the data</h2>
+      <p class="muted">Median listed price per group, from the same 6,926 listings. Groups with fewer than 5 listings are hidden.
+        Hover a point for the listing count and interquartile range; click a legend entry to hide a fuel type.</p>
+      <label class="inline">Transmission
+        <select id="trend-trans"><option>All</option><option>Manual</option><option>Automatic</option></select>
+      </label>
+      <label class="inline"><input id="trend-log" type="checkbox" checked> Log price axis</label>
+      <div class="charts">
+        <figure><figcaption>Median price by model year</figcaption><div class="chart-box"><canvas id="chart-year"></canvas></div></figure>
+        <figure><figcaption>Median price by kilometres driven</figcaption><div class="chart-box"><canvas id="chart-km"></canvas></div></figure>
+      </div>
+    </section>
+
+    <section id="model" class="card">
+      <h2>Model and limits</h2>
+      <div id="metrics" class="metrics"></div>
+      <ul class="limits">
+        <li>Prices are CarDekho asking prices (INR) from a public Kaggle dataset last updated in January 2023; the newest model year is 2020. Prices today will differ.</li>
+        <li>The 90% interval comes from conformalized quantile regression; on held-out listings it covered <span id="cov">about 90%</span> of true prices. It is a statistical range, not a guarantee.</li>
+        <li>Luxury and rare models have few listings; the model tends to under-predict very expensive cars.</li>
+        <li>Condition, accident history, city and variant trim are not in the data.</li>
+      </ul>
+      <p class="muted">Data: "Vehicle dataset" by Nehal Birla on Kaggle, Open Database License (ODbL) v1.0 / Database Contents License (DbCL) v1.0.
+        Originally a 2022 notebook project, rebuilt in 2026.</p>
+    </section>
+  </main>
+
+  <footer class="wrap muted">Darsh Pandya. Estimates are for illustration only.</footer>
+
+  <script src="vendor/chart.umd.min.js"></script>
+  <script src="predict.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

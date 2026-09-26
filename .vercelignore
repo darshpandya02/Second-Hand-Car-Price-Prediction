@@ -1,0 +1,9 @@
+.venv
+.git
+data
+notebooks
+src
+tests
+reports
+*.lock
+.env*

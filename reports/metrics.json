@@ -1,0 +1,417 @@
+{
+  "dataset": {
+    "source": "Kaggle nehalbirla/vehicle-dataset-from-cardekho, file 'Car details v3.csv'",
+    "license": "Open Database License (ODbL) v1.0 for the database, Database Contents License (DbCL) v1.0 for the contents",
+    "sha256": "1b2a30b2f36fd246366773fe5375399692f1a113890ad2a6d464b8c8deaadadb",
+    "raw_rows": 8128,
+    "raw_columns": 13,
+    "exact_duplicates_removed": 1202,
+    "rows_used": 6926,
+    "features": [
+      "brand",
+      "model",
+      "fuel",
+      "seller_type",
+      "transmission",
+      "year",
+      "km_driven",
+      "owner",
+      "mileage",
+      "engine",
+      "max_power",
+      "seats"
+    ],
+    "n_features": 12,
+    "year_range": [
+      1983,
+      2020
+    ],
+    "n_brands": 32,
+    "n_models": 211,
+    "missing_spec_rows": 224,
+    "train_rows": 5540,
+    "test_rows": 1386
+  },
+  "protocol": {
+    "split": "random 80/20, seed 42",
+    "cv": "5-fold KFold on the training split",
+    "bootstrap": "2000 percentile resamples of the test set, 95% CI",
+    "n_jobs": 4
+  },
+  "tuning": {
+    "random_forest": {
+      "grid": {
+        "regressor__rf__max_features": [
+          0.33,
+          0.5,
+          0.8
+        ],
+        "regressor__rf__min_samples_leaf": [
+          1,
+          2
+        ]
+      },
+      "best": {
+        "max_features": 0.5,
+        "min_samples_leaf": 1
+      },
+      "cv_r2": 0.8448249151445217
+    },
+    "gradient_boosting": {
+      "grid": {
+        "regressor__hgb__learning_rate": [
+          0.05,
+          0.1
+        ],
+        "regressor__hgb__max_leaf_nodes": [
+          15,
+          31,
+          63
+        ],
+        "regressor__hgb__min_samples_leaf": [
+          5,
+          10
+        ]
+      },
+      "best": {
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 15,
+        "min_samples_leaf": 5
+      },
+      "cv_r2": 0.8602050015085988
+    }
+  },
+  "results": {
+    "Median baseline": {
+      "cv": {
+        "r2": {
+          "mean": -0.05199000463311663,
+          "std": 0.01309715495477622
+        },
+        "mae": {
+          "mean": 282423.3092057762,
+          "std": 23730.988968188864
+        },
+        "mape": {
+          "mean": 0.7934637745654574,
+          "std": 0.03538943596137197
+        },
+        "rmse": {
+          "mean": 540849.1873670575,
+          "std": 77458.48368393526
+        }
+      },
+      "test": {
+        "r2": {
+          "value": -0.04597896572708482,
+          "lo": -0.06389585903977822,
+          "hi": -0.0320725855963843
+        },
+        "mae": {
+          "value": 259546.73015873015,
+          "lo": 239558.97584776336,
+          "hi": 280648.6313131313
+        },
+        "mape": {
+          "value": 0.7904903398210121,
+          "lo": 0.7296816245691449,
+          "hi": 0.8575155356933115
+        },
+        "rmse": {
+          "value": 478963.265405608,
+          "lo": 383709.31861557224,
+          "hi": 578827.6619901614
+        }
+      },
+      "sse_share_top10": 0.5239786734658112
+    },
+    "Linear (ridge, log price)": {
+      "cv": {
+        "r2": {
+          "mean": 0.8974371634204017,
+          "std": 0.0086577281622405
+        },
+        "mae": {
+          "mean": 80096.31129160106,
+          "std": 5781.773743377759
+        },
+        "mape": {
+          "mean": 0.16564913999246209,
+          "std": 0.00458832988047701
+        },
+        "rmse": {
+          "mean": 168814.07174241473,
+          "std": 26083.356506805987
+        }
+      },
+      "test": {
+        "r2": {
+          "value": 0.8755351354192751,
+          "lo": 0.8096414356910642,
+          "hi": 0.9268147194272585
+        },
+        "mae": {
+          "value": 75260.19637468159,
+          "lo": 68220.6335591546,
+          "hi": 83314.6375407587
+        },
+        "mape": {
+          "value": 0.1657573742957405,
+          "lo": 0.15692491921287752,
+          "hi": 0.17519664775209665
+        },
+        "rmse": {
+          "value": 165220.5699287201,
+          "lo": 116003.81846752197,
+          "hi": 215335.15494061713
+        }
+      },
+      "sse_share_top10": 0.6274149172293759
+    },
+    "Random forest": {
+      "cv": {
+        "r2": {
+          "mean": 0.8460192590176832,
+          "std": 0.07045002457811095
+        },
+        "mae": {
+          "mean": 79001.90097806908,
+          "std": 6458.4649173088455
+        },
+        "mape": {
+          "mean": 0.16170171077245854,
+          "std": 0.0069600901413515
+        },
+        "rmse": {
+          "mean": 203473.46483664835,
+          "std": 52232.13564630827
+        }
+      },
+      "test": {
+        "r2": {
+          "value": 0.7987730630678503,
+          "lo": 0.7040319305260376,
+          "hi": 0.9247816367349379
+        },
+        "mae": {
+          "value": 75132.47310764299,
+          "lo": 66271.05260850211,
+          "hi": 86456.42199067894
+        },
+        "mape": {
+          "value": 0.16465884420298904,
+          "lo": 0.1557455501235154,
+          "hi": 0.17462959679778783
+        },
+        "rmse": {
+          "value": 210079.55493973603,
+          "lo": 106620.38963696371,
+          "hi": 295977.2927691743
+        }
+      },
+      "sse_share_top10": 0.8114023844452138
+    },
+    "Gradient boosting (HGB)": {
+      "cv": {
+        "r2": {
+          "mean": 0.8602050015085988,
+          "std": 0.07624718103665191
+        },
+        "mae": {
+          "mean": 75072.93111047996,
+          "std": 5396.938054092295
+        },
+        "mape": {
+          "mean": 0.15631084943270482,
+          "std": 0.005851391523440316
+        },
+        "rmse": {
+          "mean": 192661.2127348405,
+          "std": 54884.956110901265
+        }
+      },
+      "test": {
+        "r2": {
+          "value": 0.8371687164984807,
+          "lo": 0.7679821367356672,
+          "hi": 0.9287000173838174
+        },
+        "mae": {
+          "value": 72691.5874899875,
+          "lo": 64589.44750087789,
+          "hi": 82393.89118106701
+        },
+        "mape": {
+          "value": 0.15744174734758748,
+          "lo": 0.14922947069380135,
+          "hi": 0.1666915032140818
+        },
+        "rmse": {
+          "value": 188977.3060065122,
+          "lo": 105044.68078782305,
+          "hi": 260067.10818247634
+        }
+      },
+      "sse_share_top10": 0.7638832896086273
+    }
+  },
+  "grouped_by_title": {
+    "test_rows": 1435,
+    "metrics": {
+      "Random forest": {
+        "r2": 0.8188073770887289,
+        "mae": 87282.16919658953,
+        "mape": 0.18027493979570475,
+        "rmse": 193977.59633659362
+      },
+      "Gradient boosting (HGB)": {
+        "r2": 0.836357721833643,
+        "mae": 84214.06282436966,
+        "mape": 0.17110757996443846,
+        "rmse": 184344.02939097962
+      }
+    }
+  },
+  "permutation_importance": {
+    "Random forest": [
+      {
+        "feature": "year",
+        "mean": 0.3523500619305624,
+        "std": 0.0415149301630341
+      },
+      {
+        "feature": "max_power",
+        "mean": 0.28758049302767325,
+        "std": 0.022708834258952124
+      },
+      {
+        "feature": "model",
+        "mean": 0.23864591809530963,
+        "std": 0.054651852793868104
+      },
+      {
+        "feature": "brand",
+        "mean": 0.09284062725523386,
+        "std": 0.011030747242615827
+      },
+      {
+        "feature": "engine",
+        "mean": 0.06202346905845111,
+        "std": 0.010542737584247695
+      },
+      {
+        "feature": "km_driven",
+        "mean": 0.03780088634761303,
+        "std": 0.00959606209917321
+      },
+      {
+        "feature": "transmission",
+        "mean": 0.030294709210292713,
+        "std": 0.005174624971369871
+      },
+      {
+        "feature": "mileage",
+        "mean": 0.006546391407051833,
+        "std": 0.002552736422877751
+      },
+      {
+        "feature": "owner",
+        "mean": 0.006456574581813179,
+        "std": 0.004622734477363454
+      },
+      {
+        "feature": "seats",
+        "mean": 0.0035489818888911227,
+        "std": 0.00039115546370321555
+      },
+      {
+        "feature": "seller_type",
+        "mean": 0.0017168461085478425,
+        "std": 0.0008659072322430007
+      },
+      {
+        "feature": "fuel",
+        "mean": 0.0012739783021675222,
+        "std": 0.0014904981508165995
+      }
+    ],
+    "Gradient boosting (HGB)": [
+      {
+        "feature": "year",
+        "mean": 0.40372457160897407,
+        "std": 0.05745751803739271
+      },
+      {
+        "feature": "max_power",
+        "mean": 0.37332395182072714,
+        "std": 0.032627193972547944
+      },
+      {
+        "feature": "model",
+        "mean": 0.16312822060774143,
+        "std": 0.03669661316498636
+      },
+      {
+        "feature": "brand",
+        "mean": 0.08446408371898737,
+        "std": 0.011361486381713984
+      },
+      {
+        "feature": "transmission",
+        "mean": 0.05288310719532045,
+        "std": 0.010232392219346447
+      },
+      {
+        "feature": "engine",
+        "mean": 0.04831571772711228,
+        "std": 0.009647333777606756
+      },
+      {
+        "feature": "km_driven",
+        "mean": 0.045595622597983124,
+        "std": 0.014654925934011596
+      },
+      {
+        "feature": "fuel",
+        "mean": 0.006286127456238788,
+        "std": 0.002242098331019245
+      },
+      {
+        "feature": "owner",
+        "mean": 0.005670119289346165,
+        "std": 0.0037034406254770652
+      },
+      {
+        "feature": "seats",
+        "mean": 0.0027589928382592997,
+        "std": 0.0016138467171162082
+      },
+      {
+        "feature": "seller_type",
+        "mean": 0.0007677799404618102,
+        "std": 0.0035423874210670447
+      },
+      {
+        "feature": "mileage",
+        "mean": -0.003966965947606061,
+        "std": 0.0129647877007315
+      }
+    ]
+  },
+  "intervals": {
+    "method": "conformalized quantile regression (HGB quantile 0.05/0.95, log scale)",
+    "target_coverage": 0.9,
+    "n_calibration": 1385,
+    "qhat_log": 0.08182444737971828,
+    "test_coverage": 0.9062049062049062,
+    "median_relative_width": 0.6316493769253657,
+    "median_width_inr": 258592.14303210357
+  },
+  "export_parity": {
+    "n": 1386,
+    "max_rel_diff_point": 0.0,
+    "max_rel_diff_lo": 0.0,
+    "max_rel_diff_hi": 0.0
+  },
+  "runtime_seconds": 222.4
+}
