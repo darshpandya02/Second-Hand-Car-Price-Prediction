@@ -1,9 +1,9 @@
-.venv
-.git
-data
-notebooks
-src
-tests
-reports
-*.lock
+/.venv
+/.git
+/data
+/notebooks
+/src
+/tests
+/reports
+/uv.lock
 .env*
